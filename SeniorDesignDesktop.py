@@ -205,14 +205,6 @@ class App(QWidget):
 		self.nameTab.setLayout(self.nameTab.layout)
 
 
-
-
-
-	
-
-		
-		
-
 		self.layout.addWidget(self.tabs)
 		self.setLayout(self.layout)
 
