@@ -1,0 +1,7 @@
+
+Flask==1.1.1
+twint==2.1.16
+instaloader==4.3
+opencv-python==4.2.0.32
+imutils==0.5.3
+emailrep==0.0.3
