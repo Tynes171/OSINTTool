@@ -57,17 +57,7 @@ def get_profile(user):
 
 def get_stories(user):
 
-	'''
-	profile = instaloader.Profile.from_username(session.context, user)
-	print('[INFO] GETTING STORY')
-
-	for story in session.get_stories():
-
-		for item in story.get_items():
-
-			session.download_storyitem(item, profile.username)
-	'''
-
+	
 	os.system('instaloader --login {} --stories-only {}'.format('nauticalnonsense_1', user))
 	files = os.listdir(user)
 	display = []
@@ -96,7 +86,7 @@ def get_photos(user):
 		session.download_post(post, user)
 	
 
-	#os.system('instaloader {}'.format(user))
+	
 	files = os.listdir(user)
 	display = []
 	for f in files:
@@ -133,10 +123,6 @@ def get_highlights(user):
 	shutil.rmtree(user)
 
 
-
-#get_stories(USER)
-#get_photos(USER)
-#get_highlights(USER)
 
 
 
