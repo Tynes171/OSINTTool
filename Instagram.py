@@ -6,7 +6,7 @@ from math import ceil
 
 session = instaloader.Instaloader()
 
-session.login('nauticalnonsense_1', 'Tilliams@1')
+session.login('nauticalnonsense_1', 'Your_Password_Here')
 USER = '_tsweets'
 
 def display_photos(image):

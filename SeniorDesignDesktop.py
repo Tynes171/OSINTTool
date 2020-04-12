@@ -17,9 +17,6 @@ import threading
 import sys
 
 
-
-
-
 class Window(QMainWindow):
 
 	def __init__(self, title = "OSINT Software"):
