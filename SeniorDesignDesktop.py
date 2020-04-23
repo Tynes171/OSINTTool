@@ -17,6 +17,9 @@ import threading
 import sys
 
 
+
+
+
 class Window(QMainWindow):
 
 	def __init__(self, title = "OSINT Software"):
@@ -146,7 +149,7 @@ class App(QWidget):
 		self.phoneNumberTab.layout = QHBoxLayout(self)
 		self.phoneNumberSearchButton = QPushButton("Search")
 		self.phoneNumberSearchButton.clicked.connect(self.get_phone_number_details)
-		self.phoneNumberLabel = QLabel("Phone Number")
+		self.phoneNumberLabel = QLabel("Phone Number (Format Must be xxxyyyzzzz not (XXX)YYY-ZZZZ")
 		self.phoneNumberTextField = QLineEdit()
 
 		'''============== ADD WIDGETS TO PHONE NUMBER WINDOW ==================='''
@@ -184,9 +187,9 @@ class App(QWidget):
 		self.firstNameTextField = QLineEdit()
 		self.lastNameLabel = QLabel("Last Name")
 		self.lastNameTextField = QLineEdit()
-		self.stateLabel = QLabel("State")
+		self.stateLabel = QLabel("State (Two Letter Code: GA not Georgia)")
 		self.stateTextField = QLineEdit()
-		self.cityLabel = QLabel("City")
+		self.cityLabel = QLabel("City (If Multiple Names, Sparate with Dash. Marietta-Heights not Marietta Heights")
 		self.cityTextField = QLineEdit()
 
 		'''============== ADD WIDGETS TO NAME WINDOW ==================='''
@@ -202,6 +205,14 @@ class App(QWidget):
 		self.nameTab.setLayout(self.nameTab.layout)
 
 
+
+
+
+	
+
+		
+		
+
 		self.layout.addWidget(self.tabs)
 		self.setLayout(self.layout)
 
@@ -210,13 +221,19 @@ class App(QWidget):
 	def get_profile(self):
 		username = self.twitterUsernameTextField.text()
 		
-		text = Twitter.profile_extraction(username)
+		self.text = Twitter.profile_extraction(username)
 		
 		msg = QMessageBox()
 		msg.setWindowTitle("Results")
-
 		msg.setInformativeText("Hits From Twitter")
-		msg.setText(text)
+		msg.setText(self.text)
+
+
+		msg.layout = QVBoxLayout()
+		saveFiles = QPushButton("Save As", msg)
+		
+		saveFiles.clicked.connect(self.save_files)
+		msg.layout.addWidget(saveFiles)
 
 		val = msg.exec_()
 
@@ -225,13 +242,21 @@ class App(QWidget):
 
 		username = self.instagramUsernameTextField.text()
 		
-		text = Instagram.get_profile(username)
+		self.text = Instagram.get_profile(username)
 		
 		msg = QMessageBox()
 		msg.setWindowTitle("Results")
 
 		msg.setInformativeText("Hits From Instagram")
-		msg.setText(text)
+		msg.setText(self.text)
+
+		msg.layout = QVBoxLayout()
+		saveFiles = QPushButton("Save As", msg)
+		
+		saveFiles.clicked.connect(self.save_files)
+		msg.layout.addWidget(saveFiles)
+
+		val = msg.exec_()
 		
 
 		val = msg.exec_()
@@ -290,12 +315,18 @@ class App(QWidget):
 	def get_birthday_hits(self):
 		username = self.twitterUsernameTextField.text()
 		
-		text = Twitter.birthday_extraction(username)
+		self.text = Twitter.birthday_extraction(username)
 		
 		msg = QMessageBox()
 		msg.setWindowTitle("Results")
 		msg.setInformativeText("Hits From Twitter")
-		msg.setText(text)
+		msg.setText(self.text)
+
+		msg.layout = QVBoxLayout()
+		saveFiles = QPushButton("Save As", msg)
+		
+		saveFiles.clicked.connect(self.save_files)
+		msg.layout.addWidget(saveFiles)
 
 		val = msg.exec_()
 
@@ -303,24 +334,36 @@ class App(QWidget):
 		username = self.twitterUsernameTextField.text()
 		search = self.twitterSearchTextField.text()
 		
-		text = Twitter.general_extraction(username, search)
+		self.text = Twitter.general_extraction(username, search)
 		
 		msg = QMessageBox()
 		msg.setWindowTitle("Results")
 		msg.setInformativeText("Hits From Twitter")
-		msg.setText(text)
+		msg.setText(self.text)
+
+		msg.layout = QVBoxLayout()
+		saveFiles = QPushButton("Save As", msg)
+		
+		saveFiles.clicked.connect(self.save_files)
+		msg.layout.addWidget(saveFiles)
 
 		val = msg.exec_()
 
 	def get_phone_number_details(self):
 		number = self.phoneNumberTextField.text()
 		
-		text = Phone.get_addresses(number)
+		self.text = Phone.get_addresses(number)
 		
 		msg = QMessageBox()
 		msg.setWindowTitle("Results")
 		msg.setInformativeText("Hits From Twilio")
-		msg.setText(text)
+		msg.setText(self.text)
+
+		msg.layout = QVBoxLayout()
+		saveFiles = QPushButton("Save As", msg)
+		
+		saveFiles.clicked.connect(self.save_files)
+		msg.layout.addWidget(saveFiles)
 
 		val = msg.exec_()
 
@@ -328,12 +371,18 @@ class App(QWidget):
 	def get_phone_number_details(self):
 		number = self.phoneNumberTextField.text()
 		
-		text = Phone.get_addresses(number)
+		self.text = Phone.get_addresses(number)
 		
 		msg = QMessageBox()
 		msg.setWindowTitle("Results")
 		msg.setInformativeText("Hits From Twilio")
-		msg.setText(text)
+		msg.setText(self.text)
+
+		msg.layout = QVBoxLayout()
+		saveFiles = QPushButton("Save As", msg)
+		
+		saveFiles.clicked.connect(self.save_files)
+		msg.layout.addWidget(saveFiles)
 
 		val = msg.exec_()
 
@@ -344,15 +393,21 @@ class App(QWidget):
 		
 		sites = HIBP.breached_accounts(email)
 		emailProfiles = EmailRepIO.get_profiles(email)
-		text = ''
-		text += "\n{}".format(emailProfiles)
-		text += "\n----- BREACHES IT WAS FOUND IN--------\n"
+		self.text = ''
+		self.text += "\n{}".format(emailProfiles)
+		self.text += "\n----- BREACHES IT WAS FOUND IN--------\n"
 		for item in sites:
-			text += item['Name'] +'\n'
+			self.text += item['Name'] +'\n'
 		msg = QMessageBox()
 		msg.setWindowTitle("Results")
 		
-		msg.setText(text)
+		msg.setText(self.text)
+
+		msg.layout = QVBoxLayout()
+		saveFiles = QPushButton("Save As", msg)
+		
+		saveFiles.clicked.connect(self.save_files)
+		msg.layout.addWidget(saveFiles)
 
 		val = msg.exec_()
 
@@ -360,12 +415,18 @@ class App(QWidget):
 	def get_breached_username_data(self):
 		username = self.usernameUsernameTextField.text()
 
-		text = Dehashed.retrieve_hits(username)
+		self.text = Dehashed.retrieve_hits(username)
 
 		msg = QMessageBox()
 		msg.setWindowTitle("Results")
 		msg.setInformativeText("Hits For Username ")
-		msg.setText(text)
+		msg.setText(self.text)
+
+		msg.layout = QVBoxLayout()
+		saveFiles = QPushButton("Save As", msg)
+		
+		saveFiles.clicked.connect(self.save_files)
+		msg.layout.addWidget(saveFiles)
 
 		val = msg.exec_()
 
@@ -377,14 +438,29 @@ class App(QWidget):
 		state = self.stateTextField.text()
 
 
-		text = ThatsThem.get_results(firstName, lastName, city, state)
+		self.text = ThatsThem.get_results(firstName, lastName, city, state)
 
 		msg = QMessageBox()
 		msg.setWindowTitle("Results")
 		msg.setInformativeText("Hits For Real Name ")
-		msg.setText(text)
+		msg.setText(self.text)
+
+		msg.layout = QVBoxLayout()
+		saveFiles = QPushButton("Save As", msg)
+		
+		saveFiles.clicked.connect(self.save_files)
+		msg.layout.addWidget(saveFiles)
 
 		val = msg.exec_()
+
+	def save_files(self):
+		name = QFileDialog.getSaveFileName(self, 'Save File')
+		file = open(name[0],'wb')
+		text = self.text
+		self.text = ''
+		file.write(bytes(text, 'utf-8'))
+		file.close()
+
 
 
 

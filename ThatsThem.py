@@ -11,20 +11,11 @@ url = 'https://thatsthem.com'
 
 def get_results(firstname, lastname, city, state):
 
-
-
-
-	
-
-
-	
-
-	#terms = "/{}-{}".format(firstname, lastname)
-
 	terms = ''
 	terms += "/name/{}-{}".format(firstname, lastname)
 
 	if city is not None:
+		
 		terms += "/{}".format(city)
 
 	if state is not None:
@@ -72,20 +63,9 @@ def get_results(firstname, lastname, city, state):
 		return text
 	#print("Info: {}".format(info[i].getText().strip()))
 
-	'''
-	print("Address: {}".format(address[i].getText().strip()))
-	try:
-		print("Phone Number: {}".format(phoneNumbers[i].getText()))
-		
-	except IndexError:
-		pass
 
-	
-	
-
-	#print("Relatives: {} \n".format(relatives[i].getText()))
-
-	'''
+if __name__ == '__main__':
+	get_results('Justin', 'Williams', 'Upper Marlboro', 'MD')
 
 
 

@@ -1,134 +1,132 @@
-from flask import Flask, render_template
-
 import Twitter, Instagram
 import HIBP
 import Dehashed
 import EmailRepIO
 import Phone
 import ThatsThem
+
+
 import threading
+import sys
 
 
 
+from kivy.app import App
+from kivy.uix.tabbedpanel import TabbedPanel
+from kivy.lang import Builder
+from kivy.uix.textinput import TextInput
 
+class OSINTApp(App):
 
-app = Flask(__name__)
+    def build(self):
+        return TabbedPanel()
 
-@app.route("/")
-def index():
-   return "<h1> Hey Buddy </h1>"
-
-
-
-
-
-#BELOW ARE FUNCTIONS FOR FUNCTIONALITY 
-
-@app.route("/twitterprofile/<username>")
-def get_profile(username):
+    def get_profile(self, username = "john1234"):
 		
-		text = Twitter.profile_extraction(username)
-		
-		return "<h1> {} </h1>".format(text)
+        
+        text = Twitter.profile_extraction(username)
+        
+        print(text)
+
+    def get_birthday_hits(self, username = "john1234"):
+
+
+        text = Twitter.birthday_extraction(username)
+        print(text)
+
+    def general_search_twitter(self, username = "john1234", search = "Yes"):
+
+
+        text = Twitter.general_extraction(username, search)
+        print(text)
+
+
+    def get_instagram_profile(self, username = "nauticalnonsense_1"):
+
+
+
+        text = Instagram.get_profile(username)
+
+        print(text)
+
+
+    def get_instagram_photos(self, username = "nauticalnonsense_1" ):
+
+
+
+        photoThread = threading.Thread(target = Instagram.get_photos, args=(username,))
+        photoThread.start()
 
 
 
 
-@app.route("/instagramprofile")
-def get_instagram_profile():
 
-	
-	text = Instagram.get_profile(username)
-	
-	
-
-@app.route("/instagramphotos")
-def get_instagram_photos():
-
-	
-	photoThread = threading.Thread(target = Instagram.get_photos, args=(username,))
-	photoThread.start()
+    def get_instagram_highlights(self,  username = "nauticalnonsense_1"):
 
 
 
-@app.route("/instagramhighlights")
-def get_instagram_highlights():
+        highlightThread = threading.Thread(target = Instagram.get_highlights, args=(username,))
+        highlightThread.start()
 
-	
-	highlightThread = threading.Thread(target = Instagram.get_highlights, args=(username,))
-	highlightThread.start()
+    def get_instagram_stories(self, username = "nauticalnonsense_1"):
 
 
 
-@app.route("/instagramstories")
-def get_instagram_stories():
+        storyThread = threading.Thread(target = Instagram.get_stories, args=(username,))
+        storyThread.start()
 
-	
-	storyThread = threading.Thread(target = Instagram.get_stories, args=(username,))
-	storyThread.start()
-
-
-@app.route("/birthdayhits")
-def get_birthday_hits():
-	
-	
-	text = Twitter.birthday_extraction(username)
-	
-	
+    
+    def get_breached_username_data(self, username):
 
 
-@app.route("/generalsearchtwitter")
-def general_search_twitter():
-	
-	text = Twitter.general_extraction(username, search)
-	
+        text = Dehashed.retrieve_hits(username)
 
-@app.route("/phonenumberdetails")
-def get_phone_number_details(self):
-	number = self.phoneNumberTextField.text()
-	
-	text = Phone.get_addresses(number)
-	
-@app.route("/breachedemailaccounts/<email>")
-def get_breached_email_accounts(email):
-	
-	
-	sites = HIBP.breached_accounts(email)
-	emailProfiles = EmailRepIO.get_profiles(email)
-	text = ''
-	text += "<p> {} </p>".format(emailProfiles)
-	text += "<h1> ----- BREACHES IT WAS FOUND IN-------- </h2>"
-	for item in sites:
-		text += '<h2> {} </h2>'.format(item['Name'])
+        print(text)
 
-	return "<h1> {} </h1>".format(text)
-	
+    def get_phone_number_details(self, number):
 
-@app.route("/breachedusernamedata/<username>")
-def get_breached_username_data(username):
-	username = self.usernameUsernameTextField.text()
+        text = Phone.get_addresses(number)
 
-	text = Dehashed.retrieve_hits(username)
-	return "<p> {} </p>".format(text)
-	
-
-@app.route("/realnamehits/")
-def get_real_name_hits():
-	firstName = self.firstNameTextField.text()
-	lastName = self.lastNameTextField.text()
-	city = self.cityTextField.text()
-	state = self.stateTextField.text()
-
-
-	text = ThatsThem.get_results(firstName, lastName, city, state)
-
-	
+        print(text)
 
 
 
 
-if __name__ == "__main__":
-    # Setting debug to True enables debug output. This line should be
-    # removed before deploying a production app.
-    app.debug = True
+
+
+
+
+    def get_breached_email_accounts(self, email = "justinwilliams171@yahoo.com"):
+        email = self.emailAddressTextField.text()
+
+        sites = HIBP.breached_accounts(email)
+        emailProfiles = EmailRepIO.get_profiles(email)
+        text = ''
+        text += "\n{}".format(emailProfiles)
+        text += "\n----- BREACHES IT WAS FOUND IN--------\n"
+        for item in sites:
+            text += item['Name'] +'\n'
+
+        print(text)
+
+
+
+
+
+
+
+
+    def get_real_name_hits(self, firstName = "Justin", lastName = "Williams", city = "Upper Marlboro", state = "MD"):
+
+        text = ThatsThem.get_results(firstName, lastName, city, state)
+        print(text)
+
+
+
+
+
+if __name__ == '__main__':
+    app = OSINTApp()
     app.run()
+
+

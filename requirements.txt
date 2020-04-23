@@ -5,3 +5,4 @@ instaloader==4.3
 opencv-python==4.2.0.32
 imutils==0.5.3
 emailrep==0.0.3
+pyperclip==1.8.0

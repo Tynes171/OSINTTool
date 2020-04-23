@@ -72,35 +72,21 @@ def general_extraction(username = "Somebody", query = "H", limit = 10):
 	
 	
 	c.Limit = limit
-	sys.stdout = open('temp.txt', 'w')
+	sys.stdout = open('temp.txt', 'w', encoding = 'unicode-escape')
 	twint.run.Search(c)
 	sys.stdout.close()
 	response = ''
-	with open('temp.txt', 'r') as temp:
-		response += temp.read()
+	with open('temp.txt', 'rb') as temp:
+
+		lines = temp.readlines()
+
+	for line in lines:
+		response += str(line, 'unicode-escape')
 	
 	os.remove('temp.txt')
 
 	return response
-	'''
-	try:
-		 
-		conn = sqlite3.connect(username+'.db')
-		curs = conn.cursor()
-		curs.execute(SELECT date, time, timezone, tweet, screen_name FROM tweets )
-		rows = curs.fetchall()
-		for row in rows:
-			#print(row)
-			response += "{} {} {} {}\n".format(row[0], row[1], row[2], row[3]) 
-		os.remove(username+'.db')
-		return response
-
-	except Exception as e:
-		print(e)
-		return "No Results"
-	'''
 	
-
 
 
 
@@ -109,6 +95,6 @@ def general_extraction(username = "Somebody", query = "H", limit = 10):
 	
 if __name__ == '__main__':
 
-	print(profile_extraction("icantstophim"))
-	print(birthday_extraction("icantstophim"))
+	#print(profile_extraction("icantstophim"))
+	#print(birthday_extraction("icantstophim"))
 	print(general_extraction("icantstophim"))
