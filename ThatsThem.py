@@ -12,14 +12,14 @@ url = 'https://thatsthem.com'
 def get_results(firstname, lastname, city, state):
 
 	terms = ''
-	terms += "/name/{}-{}".format(firstname, lastname)
+	terms += r'/name/{}-{}'.format(firstname, lastname)
 
 	if city is not None:
 		
-		terms += "/{}".format(city)
+		terms += r"/{}".format(city)
 
 	if state is not None:
-		terms += "-{}".format(state)
+		terms += r"-{}".format(state)
 
 	print(url + terms)
 	#input()

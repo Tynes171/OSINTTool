@@ -18,9 +18,11 @@ print(phone_number.add_ons)
 
 import requests, json
 
+with open('auth.json') as json_file:
+	data = json.load(json_file)
 
-account_sid = 'ACac7998d897748bfd716558ef503428e9'
-auth_token = '26ca73181c0e2dabc09e149540970aa1'
+account_sid = data['twilioSID'] 
+auth_token = data['twilioToken']
 
 params = {'AddOns': 'ekata_reverse_phone'}
 
@@ -54,6 +56,7 @@ def get_addresses(num = '3018081224'):
 		lastname = res['add_ons']["results"]["ekata_reverse_phone"]["result"]["belongs_to"]["lastname"]
 		gender = res['add_ons']["results"]["ekata_reverse_phone"]["result"]["belongs_to"]["gender"]
 		associatedPeople = res['add_ons']["results"]["ekata_reverse_phone"]["result"]["associated_people"]
+		othername = res['add_ons']["results"]["ekata_reverse_phone"]["result"]["belongs_to"]["name"]
 
 	except Exception as e:
 		print(e)
@@ -65,6 +68,9 @@ def get_addresses(num = '3018081224'):
 	
 	if lastname != None:
 		answer += "Lastname: {}\n".format(lastname)
+
+	if othername != None:
+		answer += "Name: {}\n".format(othername)
 	
 	if gender != None:
 		answer += "Gender: {}\n".format(gender)

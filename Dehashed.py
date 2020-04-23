@@ -2,12 +2,20 @@ import requests
 import json
 from pprint import *
 
+with open('auth.json') as json_file:
+	data = json.load(json_file)
+
+API_KEY = data['dehashedkey']
+user = data['dehasheduser']
+
+
 def retrieve_hits(username = 'justin'):
 
-    API_KEY = "f3d375646efe3e519a9efdd841189b40"
+    global API_KEY
+    global user
 
     url = 'https://api.dehashed.com/search'
-    auth = ('smithsapis@gmail.com', API_KEY)
+    auth = (user, API_KEY)
     headers = {'Accept': 'application/json'}
     params = {'query': username}
 
@@ -33,3 +41,10 @@ def retrieve_hits(username = 'justin'):
     return answer
     
 
+    '''
+    originalData = res.json()
+    data = json.dumps(res.json(), sort_keys = True, indent = 2)
+    "{} ".format(json.dumps(originalData['entries'][i], sort_keys = True, indent = 2))
+    
+    
+    '''

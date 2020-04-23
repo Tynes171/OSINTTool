@@ -1,15 +1,22 @@
 import instaloader
-import os, cv2, shutil, imutils
+import os, cv2, shutil, imutils, json
 
 from itertools import islice
 from math import ceil
 
 session = instaloader.Instaloader()
+with open('auth.json') as json_file:
+	data = json.load(json_file)
 
-session.login('username', 'password')
+try:
 
+	session.login(data['instagramusername'], data['instagrampassword'])
+
+except instaloader.exceptions.BadCredentialsException:
+	print("Go to Instagram.py File and put in your username and password")
 
 def display_photos(image):
+	'''
 	captionFile = image.replace('.jpg', '.txt')
 	caption = ''
 	try:
@@ -17,11 +24,11 @@ def display_photos(image):
 			caption = f.read()
 	except:
 		pass
-	
+	'''
 	img = cv2.imread(image)
 	img = imutils.resize(img, width = 400, height = 400)
-	if len(caption) > 0:
-		cv2.putText(img, caption, (0, 200), cv2.FONT_HERSHEY_SIMPLEX, .25, (0, 0, 255), 5)
+	#if len(caption) > 0:
+	#	cv2.putText(img, caption, (0, 200), cv2.FONT_HERSHEY_SIMPLEX, .25, (0, 0, 255), 5)
 	
 	cv2.imshow('Photo ', img)
 	cv2.waitKey(0)
@@ -98,7 +105,6 @@ def get_photos(user):
 		session.download_post(post, user)
 	
 
-	#os.system('instaloader {}'.format(user))
 	files = os.listdir(user)
 	display = []
 	for f in files:

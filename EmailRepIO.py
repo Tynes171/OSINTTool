@@ -1,7 +1,12 @@
 from emailrep import EmailRep
+import json
 
 # setup your api key (optional)
-emailrep = EmailRep('ccrg639u7k41n7wqg3xppt4kq2dvymo3eakwhlsta151p420')
+with open('auth.json') as json_file:
+	data = json.load(json_file)
+
+
+emailrep = EmailRep(data['emailrepiokey'])
 
 
 

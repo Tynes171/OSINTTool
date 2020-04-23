@@ -4,6 +4,9 @@ import sqlite3
 import sys
 
 
+import Instagram
+
+
 
 
 
@@ -44,7 +47,7 @@ def birthday_extraction(username = "Somebody"):
 	try: 
 		conn = sqlite3.connect(username+'.db')
 		curs = conn.cursor()
-		curs.execute('''SELECT COUNT(date) as hits, date as birthday FROM tweets GROUP BY date''')
+		curs.execute('''SELECT MAX(date) as hits, date as birthday FROM tweets GROUP BY date''')
 		rows = curs.fetchall()
 		for row in rows:
 			#print(row)
@@ -94,7 +97,7 @@ def general_extraction(username = "Somebody", query = "H", limit = 10):
 
 	
 if __name__ == '__main__':
-
-	#print(profile_extraction("icantstophim"))
-	#print(birthday_extraction("icantstophim"))
-	print(general_extraction("icantstophim"))
+	username = 'justin'
+	#print(profile_extraction(username))
+	#print(birthday_extraction(username))
+	print(general_extraction(username))

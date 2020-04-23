@@ -1,4 +1,6 @@
 OSINTMobile/
 __pycache__/
-hey.txt
+*.txt
+*.db
 OSINT.kv
+*.json

@@ -15,6 +15,7 @@ import ThatsThem
 
 import threading
 import sys
+import pyperclip
 
 
 
@@ -73,7 +74,7 @@ class App(QWidget):
 
 
 		self.twitterProfileButton = QPushButton("Profile")
-		self.twitterProfileButton.clicked.connect(self.get_profile)
+		self.twitterProfileButton.clicked.connect(self.get_twitter_profile)
 
 		self.twitterUsernameLabel = QLabel("Username")
 		self.twitterSearchLabel = QLabel("Search")
@@ -204,21 +205,12 @@ class App(QWidget):
 		self.nameTab.layout.addWidget(self.addressSearchButton)
 		self.nameTab.setLayout(self.nameTab.layout)
 
-
-
-
-
-	
-
-		
-		
-
 		self.layout.addWidget(self.tabs)
 		self.setLayout(self.layout)
 
 
 
-	def get_profile(self):
+	def get_twitter_profile(self):
 		username = self.twitterUsernameTextField.text()
 		
 		self.text = Twitter.profile_extraction(username)
@@ -229,11 +221,16 @@ class App(QWidget):
 		msg.setText(self.text)
 
 
-		msg.layout = QVBoxLayout()
-		saveFiles = QPushButton("Save As", msg)
+		
+		saveFiles = QPushButton("Save As")
+		copyText = QPushButton("Copy")
 		
 		saveFiles.clicked.connect(self.save_files)
-		msg.layout.addWidget(saveFiles)
+		copyText.clicked.connect(self.copy_text)
+
+
+		msg.addButton(saveFiles, QMessageBox.YesRole)
+		msg.addButton(copyText, QMessageBox.YesRole)
 
 		val = msg.exec_()
 
@@ -250,11 +247,16 @@ class App(QWidget):
 		msg.setInformativeText("Hits From Instagram")
 		msg.setText(self.text)
 
-		msg.layout = QVBoxLayout()
-		saveFiles = QPushButton("Save As", msg)
+		saveFiles = QPushButton("Save As")
+		copyText = QPushButton("Copy")
 		
 		saveFiles.clicked.connect(self.save_files)
-		msg.layout.addWidget(saveFiles)
+		copyText.clicked.connect(self.copy_text)
+
+
+		msg.addButton(saveFiles, QMessageBox.YesRole)
+		msg.addButton(copyText, QMessageBox.YesRole)
+
 
 		val = msg.exec_()
 		
@@ -322,11 +324,16 @@ class App(QWidget):
 		msg.setInformativeText("Hits From Twitter")
 		msg.setText(self.text)
 
-		msg.layout = QVBoxLayout()
-		saveFiles = QPushButton("Save As", msg)
+		saveFiles = QPushButton("Save As")
+		copyText = QPushButton("Copy")
 		
 		saveFiles.clicked.connect(self.save_files)
-		msg.layout.addWidget(saveFiles)
+		copyText.clicked.connect(self.copy_text)
+
+
+		msg.addButton(saveFiles, QMessageBox.YesRole)
+		msg.addButton(copyText, QMessageBox.YesRole)
+
 
 		val = msg.exec_()
 
@@ -341,11 +348,15 @@ class App(QWidget):
 		msg.setInformativeText("Hits From Twitter")
 		msg.setText(self.text)
 
-		msg.layout = QVBoxLayout()
-		saveFiles = QPushButton("Save As", msg)
+		saveFiles = QPushButton("Save As")
+		copyText = QPushButton("Copy")
 		
 		saveFiles.clicked.connect(self.save_files)
-		msg.layout.addWidget(saveFiles)
+		copyText.clicked.connect(self.copy_text)
+
+
+		msg.addButton(saveFiles, QMessageBox.YesRole)
+		msg.addButton(copyText, QMessageBox.YesRole)
 
 		val = msg.exec_()
 
@@ -359,11 +370,17 @@ class App(QWidget):
 		msg.setInformativeText("Hits From Twilio")
 		msg.setText(self.text)
 
-		msg.layout = QVBoxLayout()
-		saveFiles = QPushButton("Save As", msg)
+		
+		saveFiles = QPushButton("Save As")
+		copyText = QPushButton("Copy")
 		
 		saveFiles.clicked.connect(self.save_files)
-		msg.layout.addWidget(saveFiles)
+		copyText.clicked.connect(self.copy_text)
+
+
+		msg.addButton(saveFiles, QMessageBox.YesRole)
+		msg.addButton(copyText, QMessageBox.YesRole)
+
 
 		val = msg.exec_()
 
@@ -378,11 +395,16 @@ class App(QWidget):
 		msg.setInformativeText("Hits From Twilio")
 		msg.setText(self.text)
 
-		msg.layout = QVBoxLayout()
-		saveFiles = QPushButton("Save As", msg)
+		saveFiles = QPushButton("Save As")
+		copyText = QPushButton("Copy")
 		
 		saveFiles.clicked.connect(self.save_files)
-		msg.layout.addWidget(saveFiles)
+		copyText.clicked.connect(self.copy_text)
+
+
+		msg.addButton(saveFiles, QMessageBox.YesRole)
+		msg.addButton(copyText, QMessageBox.YesRole)
+
 
 		val = msg.exec_()
 
@@ -403,11 +425,17 @@ class App(QWidget):
 		
 		msg.setText(self.text)
 
-		msg.layout = QVBoxLayout()
-		saveFiles = QPushButton("Save As", msg)
+		
+		saveFiles = QPushButton("Save As")
+		copyText = QPushButton("Copy")
 		
 		saveFiles.clicked.connect(self.save_files)
-		msg.layout.addWidget(saveFiles)
+		copyText.clicked.connect(self.copy_text)
+
+
+		msg.addButton(saveFiles, QMessageBox.YesRole)
+		msg.addButton(copyText, QMessageBox.YesRole)
+
 
 		val = msg.exec_()
 
@@ -422,11 +450,16 @@ class App(QWidget):
 		msg.setInformativeText("Hits For Username ")
 		msg.setText(self.text)
 
-		msg.layout = QVBoxLayout()
-		saveFiles = QPushButton("Save As", msg)
+		saveFiles = QPushButton("Save As")
+		copyText = QPushButton("Copy")
 		
 		saveFiles.clicked.connect(self.save_files)
-		msg.layout.addWidget(saveFiles)
+		copyText.clicked.connect(self.copy_text)
+
+
+		msg.addButton(saveFiles, QMessageBox.YesRole)
+		msg.addButton(copyText, QMessageBox.YesRole)
+
 
 		val = msg.exec_()
 
@@ -445,21 +478,37 @@ class App(QWidget):
 		msg.setInformativeText("Hits For Real Name ")
 		msg.setText(self.text)
 
-		msg.layout = QVBoxLayout()
-		saveFiles = QPushButton("Save As", msg)
+		saveFiles = QPushButton("Save As")
+		copyText = QPushButton("Copy")
 		
 		saveFiles.clicked.connect(self.save_files)
-		msg.layout.addWidget(saveFiles)
+		copyText.clicked.connect(self.copy_text)
+
+
+		msg.addButton(saveFiles, QMessageBox.YesRole)
+		msg.addButton(copyText, QMessageBox.YesRole)
+
 
 		val = msg.exec_()
 
 	def save_files(self):
 		name = QFileDialog.getSaveFileName(self, 'Save File')
-		file = open(name[0],'wb')
+		try:
+			file = open(name[0],'wb')
+		
+		except FileNotFoundError:
+			return
+
 		text = self.text
 		self.text = ''
 		file.write(bytes(text, 'utf-8'))
 		file.close()
+
+	def copy_text(self):
+
+		text = self.text
+		self.text = ''
+		pyperclip.copy(text)
 
 
 
