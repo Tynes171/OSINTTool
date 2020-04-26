@@ -34,9 +34,11 @@ def get_addresses(num = '3018081224'):
 
 	url = 'https://lookups.twilio.com/v1/PhoneNumbers/+1'+num
 
-
-	req = requests.get(url, params, auth=(account_sid, auth_token))
-	req.raise_for_status()
+	try:
+		req = requests.get(url, params, auth=(account_sid, auth_token))
+		req.raise_for_status()
+	except Exception as e:
+		return "Nothing was Found ".format(e)
 	res = req.json()#json.loads(req.text)
 	data = json.dumps(res, indent=2, sort_keys=True)
 	print(res)

@@ -19,9 +19,12 @@ def retrieve_hits(username = 'justin'):
     headers = {'Accept': 'application/json'}
     params = {'query': username}
 
-
-    res = requests.get(url, auth = auth, headers = headers, params = params)
-    print(res.raise_for_status())
+    try:
+        res = requests.get(url, auth = auth, headers = headers, params = params)
+        print(res.raise_for_status())
+    except Exception as e:
+        return "Failed Becuase of a {}".format(e)
+    
     originalData = res.json()
     data = json.dumps(res.json(), sort_keys = True, indent = 2)
     

@@ -150,7 +150,7 @@ class App(QWidget):
 		self.phoneNumberTab.layout = QHBoxLayout(self)
 		self.phoneNumberSearchButton = QPushButton("Search")
 		self.phoneNumberSearchButton.clicked.connect(self.get_phone_number_details)
-		self.phoneNumberLabel = QLabel("Phone Number (Format Must be xxxyyyzzzz not (XXX)YYY-ZZZZ")
+		self.phoneNumberLabel = QLabel("Phone Number (Must be 10 Digits)")
 		self.phoneNumberTextField = QLineEdit()
 
 		'''============== ADD WIDGETS TO PHONE NUMBER WINDOW ==================='''
@@ -235,6 +235,57 @@ class App(QWidget):
 		val = msg.exec_()
 
 
+
+
+	def get_birthday_hits(self):
+		username = self.twitterUsernameTextField.text()
+		
+		self.text = Twitter.birthday_extraction(username)
+		
+		msg = QMessageBox()
+		msg.setWindowTitle("Results")
+		msg.setInformativeText("Hits From Twitter")
+		msg.setText(self.text)
+
+		saveFiles = QPushButton("Save As")
+		copyText = QPushButton("Copy")
+		
+		saveFiles.clicked.connect(self.save_files)
+		copyText.clicked.connect(self.copy_text)
+
+
+		msg.addButton(saveFiles, QMessageBox.YesRole)
+		msg.addButton(copyText, QMessageBox.YesRole)
+
+
+		val = msg.exec_()
+
+	def general_search_twitter(self):
+		username = self.twitterUsernameTextField.text()
+		search = self.twitterSearchTextField.text()
+		
+		self.text = Twitter.general_extraction(username, search)
+		
+		msg = QMessageBox()
+		msg.setWindowTitle("Results")
+		msg.setInformativeText("Hits From Twitter")
+		msg.setText(self.text)
+
+		saveFiles = QPushButton("Save As")
+		copyText = QPushButton("Copy")
+		
+		saveFiles.clicked.connect(self.save_files)
+		copyText.clicked.connect(self.copy_text)
+
+
+		msg.addButton(saveFiles, QMessageBox.YesRole)
+		msg.addButton(copyText, QMessageBox.YesRole)
+
+		val = msg.exec_()
+
+
+
+
 	def get_instagram_profile(self):
 
 		username = self.instagramUsernameTextField.text()
@@ -261,7 +312,7 @@ class App(QWidget):
 		val = msg.exec_()
 		
 
-		val = msg.exec_()
+		
 
 	def get_instagram_photos(self):
 
@@ -314,51 +365,6 @@ class App(QWidget):
 
 
 
-	def get_birthday_hits(self):
-		username = self.twitterUsernameTextField.text()
-		
-		self.text = Twitter.birthday_extraction(username)
-		
-		msg = QMessageBox()
-		msg.setWindowTitle("Results")
-		msg.setInformativeText("Hits From Twitter")
-		msg.setText(self.text)
-
-		saveFiles = QPushButton("Save As")
-		copyText = QPushButton("Copy")
-		
-		saveFiles.clicked.connect(self.save_files)
-		copyText.clicked.connect(self.copy_text)
-
-
-		msg.addButton(saveFiles, QMessageBox.YesRole)
-		msg.addButton(copyText, QMessageBox.YesRole)
-
-
-		val = msg.exec_()
-
-	def general_search_twitter(self):
-		username = self.twitterUsernameTextField.text()
-		search = self.twitterSearchTextField.text()
-		
-		self.text = Twitter.general_extraction(username, search)
-		
-		msg = QMessageBox()
-		msg.setWindowTitle("Results")
-		msg.setInformativeText("Hits From Twitter")
-		msg.setText(self.text)
-
-		saveFiles = QPushButton("Save As")
-		copyText = QPushButton("Copy")
-		
-		saveFiles.clicked.connect(self.save_files)
-		copyText.clicked.connect(self.copy_text)
-
-
-		msg.addButton(saveFiles, QMessageBox.YesRole)
-		msg.addButton(copyText, QMessageBox.YesRole)
-
-		val = msg.exec_()
 
 	def get_phone_number_details(self):
 		number = self.phoneNumberTextField.text()

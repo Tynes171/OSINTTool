@@ -23,10 +23,13 @@ def get_results(firstname, lastname, city, state):
 
 	print(url + terms)
 	#input()
-	req = requests.get(url + terms, params = {'loaded':1})
 
-	req.raise_for_status()
+	try:
+		req = requests.get(url + terms, params = {'loaded':1})
 
+		req.raise_for_status()
+	except Exception as e:
+		return "Failed Becuase of a {}".format(e)
 
 	#print(req.text)
 

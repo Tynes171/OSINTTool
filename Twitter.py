@@ -47,18 +47,20 @@ def birthday_extraction(username = "Somebody"):
 	try: 
 		conn = sqlite3.connect(username+'.db')
 		curs = conn.cursor()
-		curs.execute('''SELECT MAX(date) as hits, date as birthday FROM tweets GROUP BY date''')
+		curs.execute('''SELECT COUNT(date) AS hits, date as birthday FROM tweets GROUP BY date''')
 		rows = curs.fetchall()
 		for row in rows:
 			#print(row)
 			response = "{} {} {}\n".format(response, row[0], row[1]) 
 
-
+		conn.close()
 		#print("Response\n {}".format(response))
+ 
 
+		#
 		
 	except Exception as e:
-		print(e)
+		return "No Results because of {}".format(e)
 
 	'''
 	finally:
@@ -79,13 +81,14 @@ def general_extraction(username = "Somebody", query = "H", limit = 10):
 	twint.run.Search(c)
 	sys.stdout.close()
 	response = ''
-	with open('temp.txt', 'rb') as temp:
+	temp = open('temp.txt', 'rb')
 
-		lines = temp.readlines()
+	lines = temp.readlines()
 
 	for line in lines:
 		response += str(line, 'unicode-escape')
 	
+	temp.close()
 	os.remove('temp.txt')
 
 	return response
