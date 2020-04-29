@@ -32,7 +32,7 @@ def retrieve_hits(username = 'justin'):
     answer = ''
 
     i = 0
-    while i < len(originalData['entries']) and i <= 5:
+    while i < len(originalData['entries']) and i <= 4:
 
         answer += "------- RESULT {} --------".format(i)
         answer += "{} ".format(json.dumps(originalData['entries'][i], sort_keys = True, indent = 2))

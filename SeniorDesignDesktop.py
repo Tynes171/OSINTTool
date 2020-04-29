@@ -216,8 +216,8 @@ class App(QWidget):
 		self.text = Twitter.profile_extraction(username)
 		
 		msg = QMessageBox()
-		msg.setWindowTitle("Results")
-		msg.setInformativeText("Hits From Twitter")
+		msg.setWindowTitle("Hits From Twitter")
+		msg.setInformativeText("Hit Copy to Exit as well")
 		msg.setText(self.text)
 
 
@@ -243,8 +243,8 @@ class App(QWidget):
 		self.text = Twitter.birthday_extraction(username)
 		
 		msg = QMessageBox()
-		msg.setWindowTitle("Results")
-		msg.setInformativeText("Hits From Twitter")
+		msg.setWindowTitle("Hits From Twitter")
+		msg.setInformativeText("Hit Copy to Exit As Well")
 		msg.setText(self.text)
 
 		saveFiles = QPushButton("Save As")
@@ -267,8 +267,8 @@ class App(QWidget):
 		self.text = Twitter.general_extraction(username, search)
 		
 		msg = QMessageBox()
-		msg.setWindowTitle("Results")
-		msg.setInformativeText("Hits From Twitter")
+		msg.setWindowTitle("Hits From Twitter")
+		msg.setInformativeText("Hit Copy to Exit As Well")
 		msg.setText(self.text)
 
 		saveFiles = QPushButton("Save As")
@@ -293,9 +293,9 @@ class App(QWidget):
 		self.text = Instagram.get_profile(username)
 		
 		msg = QMessageBox()
-		msg.setWindowTitle("Results")
+		msg.setWindowTitle("Hits From Instagram")
 
-		msg.setInformativeText("Hits From Instagram")
+		msg.setInformativeText("Hit Copy to Exit As Well")
 		msg.setText(self.text)
 
 		saveFiles = QPushButton("Save As")
@@ -372,8 +372,8 @@ class App(QWidget):
 		self.text = Phone.get_addresses(number)
 		
 		msg = QMessageBox()
-		msg.setWindowTitle("Results")
-		msg.setInformativeText("Hits From Twilio")
+		msg.setWindowTitle("Hits From Twilio")
+		msg.setInformativeText("Hit Copy to Exit As Well")
 		msg.setText(self.text)
 
 		
@@ -397,8 +397,8 @@ class App(QWidget):
 		self.text = Phone.get_addresses(number)
 		
 		msg = QMessageBox()
-		msg.setWindowTitle("Results")
-		msg.setInformativeText("Hits From Twilio")
+		msg.setWindowTitle("Hits From Twilio")
+		msg.setInformativeText("Hit Copy to Exit As Well")
 		msg.setText(self.text)
 
 		saveFiles = QPushButton("Save As")
@@ -427,7 +427,9 @@ class App(QWidget):
 		for item in sites:
 			self.text += item['Name'] +'\n'
 		msg = QMessageBox()
-		msg.setWindowTitle("Results")
+		msg.setWindowTitle("Hits for Email")
+		
+		msg.setInformativeText("Hit Copy to Exit As Well ")
 		
 		msg.setText(self.text)
 
@@ -452,8 +454,8 @@ class App(QWidget):
 		self.text = Dehashed.retrieve_hits(username)
 
 		msg = QMessageBox()
-		msg.setWindowTitle("Results")
-		msg.setInformativeText("Hits For Username ")
+		msg.setWindowTitle("Hits For Username")
+		msg.setInformativeText("Hit Copy to Exit As Well ")
 		msg.setText(self.text)
 
 		saveFiles = QPushButton("Save As")
@@ -480,8 +482,8 @@ class App(QWidget):
 		self.text = ThatsThem.get_results(firstName, lastName, city, state)
 
 		msg = QMessageBox()
-		msg.setWindowTitle("Results")
-		msg.setInformativeText("Hits For Real Name ")
+		msg.setWindowTitle("Hits For Real name")
+		msg.setInformativeText("Hit Copy to Exit As Well ")
 		msg.setText(self.text)
 
 		saveFiles = QPushButton("Save As")
