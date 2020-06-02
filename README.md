@@ -31,7 +31,7 @@ Create an auth.json file like this
 
 
 
-##Phone.py
+## Phone.py
 
 -Phone.py uses twilio. You must first create an account with Twilio. 
 -Then you should see your dashboard. Click the three dots on the left toolbar.
