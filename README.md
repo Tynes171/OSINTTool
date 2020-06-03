@@ -1,4 +1,4 @@
-# SeniorDesign
+# OSINT (Concept) Tool
 
 ## Setup
 
