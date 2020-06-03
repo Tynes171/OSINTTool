@@ -45,3 +45,31 @@ Create an auth.json file like this
 
 -Copy your auth token (On your home dashboard) and paste them in the auth.json file.
 ```
+
+
+## Instagram.py
+```
+-Instagram.py Uses instaloader as its main function.
+
+-To set this up all you have to do is create an instagram account 
+
+-Put in your credentials In the auth.json file
+
+-You can download profile data from someones instagram. 
+
+-If a persons profile is private, then you must be following them to download their data
+```
+
+
+## EmailRepIO.py
+```
+-EmailRepIO.py Uses EmailRepIO as its main function.
+
+-Go to emailrepio.com and click "API KEY"
+
+-Choose which one free or paid, then fill out the information.
+
+-Afterwards, check your email and there is your API Key
+
+-Paste this in the auth.json file
+```
