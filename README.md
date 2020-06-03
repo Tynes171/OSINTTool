@@ -2,6 +2,7 @@
 
 ## Setup
 
+```
 Once the repository is cloned, run 
 
 -pip3 install -r requirements.txt
@@ -9,6 +10,7 @@ Once the repository is cloned, run
 -python3 SeniorDesignDesktop.py
 
 -THe GUI Will run but you must set everything (SEE BELOW) For the functionalities to work
+```
 
 ## APIS
 
