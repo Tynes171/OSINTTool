@@ -1,6 +1,6 @@
 PyQt5==5.14.1
 PyQt5-sip==12.7.1
-Flask==1.1.1
+Flask==2.3.2
 twint==2.1.16
 instaloader==4.3
 opencv-python==4.2.0.32
